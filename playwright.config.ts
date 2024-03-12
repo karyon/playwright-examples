@@ -34,7 +34,15 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { 
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          devtools: true,
+          // args: [
+          //   '--auto-open-devtools-for-tabs',
+          // ],
+        }
+      },
     },
 
     {
