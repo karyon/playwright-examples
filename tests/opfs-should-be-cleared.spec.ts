@@ -1,21 +1,10 @@
 import { test, expect, Page } from '@playwright/test';
 
-async function createWorker(page) {
-  let worker;
-  await page.evaluate(() => {
-      new Worker('');
-  });
-  await expect.poll(() => (worker = page.workers()[0])).toBeDefined();
-  return worker;
-}
-
-
 test.describe('opfs should be cleared', () => {
 
   test('opfs', async ({ page }) => {
     await page.goto('https://example.com/');
-    const worker = await createWorker(page);
-    const created = await worker.evaluate(async () => {
+    const created = await page.evaluate(async () => {
       const root = await navigator.storage.getDirectory();
       try {
         await root.getDirectoryHandle('someDirectoryName');
